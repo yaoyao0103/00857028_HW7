@@ -34,32 +34,32 @@
     <script type="text/javascript">
         function loadSearches() 
         {
+            var length = localStorage.length; // number of key-value pairs
+            tags = []; // create empty array
 
-        var length = localStorage.length; // number of key-value pairs
-        tags = []; // create empty array
+            // load all keys
+            for (var i = 0; i < length; ++i) 
+            {   
+                if(localStorage.key(i).substring(0,5)=="ntou-"){
+                    tags.push(localStorage.key(i));
+                }
+            } // end for
 
-        // load all keys
-        for (var i = 0; i < length; ++i) 
-        {
-            tags[i] = localStorage.key(i);
-        } // end for
+            var markup = ""; // used to store search link markup
 
-        var markup = ""; // used to store search link markup
+            // build list of links
+            for (var tag in tags) 
+            {
+                var temp = localStorage.getItem(tags[tag]);
+                temp = JSON.parse(temp);
+                markup += "<tr><td>" + temp.title + 
+                    "</td><td>" + temp.author + 
+                    "</td><td>" +  temp.year +
+                    "</td><td><a href='" + temp.url + "' target = '_blank'>" + temp.url  + 
+                    "</a></td></tr>"
+            } // end for
 
-        // build list of links
-        for (var tag in tags) 
-        {
-            var temp = localStorage.getItem(tags[tag]);
-            temp = JSON.parse(temp);
-            console.log(temp);
-            markup += "<tr><td>" + temp.title + 
-                "</td><td>" + temp.author + 
-                "</td><td>" +  temp.year +
-                "</td><td><a href='" + temp.url + "' target = '_blank'>" + temp.url  + 
-                "</a></td></tr>"
-        } // end for
-
-        document.getElementById("tableBody").innerHTML = markup;
+            document.getElementById("tableBody").innerHTML = markup;
         } // end function loadSearches
         function save() 
         {
@@ -104,7 +104,7 @@
 </head>
 
 <body>
-    <a href="https://yaoyao0103.github.io/00857028_HW7/" target= "_blank">GitHub Link</a>
+    <a href="https://yaoyao0103.github.io/00857028_HW7/00857028_HW7-2.html" target= "_blank">GitHub Link</a>
     <form action="#">
         <p>
             <label>Book Title:
